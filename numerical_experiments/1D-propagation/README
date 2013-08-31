@@ -1,0 +1,15 @@
+*********************************************************************
+************ PROPAGATION OF A PLANE-WAVE IN C-DISP MEDIA ************
+*********************************************************************
+
+Code to generate the plots in the section Propagation of a plane-wave 
+     perturbation. 
+** There are 2 folders: FV_solution and HOM_solution. 
+** Within FV_solution there are several subfolders. Run psystem.py in
+   each subfolder and then write_slice.py. NOTE: the data to generate 
+   plots in the paper is included. This will generate some .txt files
+   that have to be copied to the corresponding subfolder within 
+   HOM_solution. 
+** Within each subfolder of HOM_solution run solver.m. 
+
+*********************************************************************
