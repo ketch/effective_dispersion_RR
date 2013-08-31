@@ -1,0 +1,15 @@
+*********************************************************************
+*********************** EFFECTIVE SOUND SPEED ***********************
+*********************************************************************
+
+Code to generate the figures in section Effective sound speed. 
+** Run polar_plot/sound_speed.m to generate the polar plot. 
+** Within 2D_wave/leading_order run solver.m and then plotting.m
+   to generate some data and the plots for the 2D wave propagation 
+   considering the leading order homogenized solution. 
+** Within 2D_wave/FV_simulation run psystem.py to generate the data, 
+   then run plots_to_paper.py to generate the plots. 
+   Since running psystem.py is expensive, the required data to 
+   generate the plots is included.
+
+*********************************************************************
