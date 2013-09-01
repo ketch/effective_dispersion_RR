@@ -1,0 +1,23 @@
+*********************************************************************
+*************** NUMERICAL EXPERIMENTS ON SQUARE DOMAINS *************
+*********************************************************************
+
+Code to generate the 2D wave propagation figures in section wave 
+     behavior in 2D layered periodic media. 
+** There are three folders: FV_simulations, homogenized_solutions and 
+   plotting_slices. 
+** Within FV_simulation there are three folders each with subfolders. 
+   For each subfolder run psystem.py and then plots_to_paper.py. This
+   will generate the surface plots and .txt files with data of the FV
+   slices. Copy all .txt files to the corresponding subfolder in 
+   plotting_slices. 
+** Within homogenized_solutions run solver.m six times uncommenting 
+   each time just one set of parameters. This will generate six .mat
+   files that have to be copied to the corresponding subfolders of 
+   plotting_slices.
+** Within each subfolder in plotting_slices run plotting_slices.m to 
+   generate the slices plots. 
+NOTE: Each time psystem.py has to be run we include the required data 
+      to generate the plots.
+
+*********************************************************************
