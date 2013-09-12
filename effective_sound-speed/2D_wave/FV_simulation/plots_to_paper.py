@@ -23,7 +23,7 @@ def plot_p(frame):
     pl.xticks(size=20); pl.yticks(size=20)
     #pl.xlabel('x',fontsize=20); pl.ylabel('y',fontsize=20)
     #pl.pcolormesh(xx,yy,p_subxy,cmap=cm.OrRd)
-    pl.pcolormesh(xx,yy,p)
+    pl.pcolormesh(xx,yy,p,cmap='RdBu_r')
     cb = pl.colorbar(ticks=[0.5,1,1.5,2]);
     
     #pl.clim(ticks=[0.5,1,1.5,2])

@@ -3,6 +3,10 @@ clear; clc;
 
 load('sound-speed_2D-wave.mat')
 
+cm = cbrewer('div','RdBu',20);
+colormap(cm)
+colormap(flipud(colormap))
+
 % plotting surface plot at t=0
 T=0; nt=T/0.5+1; %dt=0.5
 pp=squeeze(U(nt,:,:));
@@ -13,6 +17,10 @@ colorbar; view(2)
 title(['t=' num2str(0.5*(nt-1))],'fontsize',20);
 axis equal
 set(gca,'fontsize',20)
+
+cm = cbrewer('div','RdBu',20);
+colormap(cm)
+colormap(flipud(colormap))
 
 % plotting surface plot at t=5
 T=5; nt=T/0.5+1; %dt=0.5

@@ -23,10 +23,11 @@ def plot_p(frame,slices_xlimits=None,init_cond=False):
         str_frame = str(frame)
 
     p=sol.state.q[0,:,:]
-    pl.pcolormesh(xx,yy,p,cmap=cm.OrRd)
+    pl.pcolormesh(xx,yy,p,cmap='RdBu_r')
     pl.title("t= "+str(sol.state.t),fontsize=20)
     pl.xlabel('x',fontsize=20); pl.ylabel('y',fontsize=20)
     pl.xticks(size=20); pl.yticks(size=20)
+    pl.clim([-0.24,0.24])
     cb = pl.colorbar();
     #pl.clim(colorbar_min,colorbar_max);
     imaxes = pl.gca(); pl.axes(cb.ax)

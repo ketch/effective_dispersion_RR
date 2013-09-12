@@ -1,5 +1,5 @@
 function disp_relation
-clear all; clc
+clc
 
 K1=1; rho1=1; K2=1; rho2=1;
 get_plots(K1,rho1,K2,rho2,'homogeneous')
@@ -38,6 +38,10 @@ c=@(kkx,kky)sqrt(w2(kkx,kky))./sqrt(kkx.^2+kky.^2);
 
 [kkx,kky]=meshgrid(linspace(0,3,500),linspace(0,3,500));
 c=c(kkx,kky);
+
+cm = cbrewer('div','RdBu',20);
+colormap(cm)
+colormap(flipud(colormap))
 
 %% pcolor
 f=figure(1); clf
