@@ -87,7 +87,7 @@ def sound_speed(kx,ky,iparam):
 tick_vals = np.array( (0,25,50,75,100),dtype=int )
 
 frame = [65,65,95,65]
-skip = 1
+skip = 4
 
 p   = np.load('p'+str(skip)+'.npy')
 pc  = np.load('pc'+str(skip)+'.npy')
@@ -155,11 +155,10 @@ for i,p in enumerate([p,pc,pz,pcz]):
     if i in (1,2,3): # new runs
         xx = xx1
         yy = yy1
-        clim = [-0.25,0.25]
     else: # old runs
         xx = xx2
         yy = yy2
-        clim = [-0.6,0.6]
+    clim = [-0.25,0.25]
     # Main plot
     axmain.append(plt.axes(mainframe[i]))
     #if i>0:
@@ -273,25 +272,25 @@ for i,p in enumerate([p,pc,pz,pcz]):
 
 # Top left
 axmain[0].text(0.02,0.98,'Homogeneous\n medium',transform=axmain[0].transAxes,verticalalignment='top')
-axx[0].set_ylim((-0.38,0.38))
-axy[0].set_xlim((-0.38,0.38))
+axx[0].set_ylim((-0.05,0.05))
+axy[0].set_xlim((-0.05,0.05))
 
 
 # Top right
 axmain[1].text(0.98,0.98,'Sound speed\n mismatched',horizontalalignment='right',transform=axmain[1].transAxes,verticalalignment='top')
-axx[1].set_ylim((-0.04,0.04))
-axy[1].set_xlim((-0.04,0.04))
+axx[1].set_ylim((-0.05,0.05))
+axy[1].set_xlim((-0.05,0.05))
 
 
 #Bottom left
 axmain[2].text(0.02,0.02,'Impedance\n mismatched',transform=axmain[2].transAxes)
-axx[2].set_ylim((-0.04,0.04))
+axx[2].set_ylim((-0.07,0.07))
 axy[2].set_xlim((-0.04,0.04))
 axx[2].xaxis.set_label_coords(1, -0.5)
 
 # Bottom right
 axmain[3].text(0.98,0.02,'Both\n mismatched',horizontalalignment='right',transform=axmain[3].transAxes)
-axx[3].set_ylim((-0.04,0.04))
+axx[3].set_ylim((-0.05,0.05))
 axy[3].set_xlim((-0.04,0.04))
 
 
@@ -324,10 +323,10 @@ axins = zoomed_inset_axes(axmain[2],6,loc=1)
 yfrac = yy-np.floor(yy)
 mat = yfrac>0.5
 
-axins.imshow(mat[:80,:320].T,vmin=-0.5, vmax=1.5, extent=[55,60,55,60],interpolation='nearest',origin='lower',cmap='binary',alpha=0.8)
+axins.imshow(mat[:80/skip,:320/skip].T,vmin=-0.5, vmax=1.5, extent=[55,60,55,60],interpolation='nearest',origin='lower',cmap='binary',alpha=0.8)
 axins.xaxis.set_major_locator(nullloc)
 axins.yaxis.set_major_locator(nullloc)
-mark_inset(axmain[2],axins,2,4,fc='none',ec='0.5')
+mark_inset(axmain[2],axins,2,4,fc='0.8',ec='0.1')
 
 #plt.suptitle('Acoustic wave propagation in layered periodic media',fontsize=25*multiplier,color=textcolor)
 #plt.figtext(0.5,0.05,'Units scaled to medium period', fontsize=15*multiplier, horizontalalignment='center',color=textcolor)

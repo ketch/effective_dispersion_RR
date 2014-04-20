@@ -18,7 +18,7 @@ nullloc = plt.NullLocator()
 tick_vals = np.array( (0,25,50,75,100),dtype=int )
 
 frame = [65,65,95,65]
-skip = 1
+skip = 4
 
 p   = np.load('p'+str(skip)+'.npy')
 pc  = np.load('pc'+str(skip)+'.npy')
