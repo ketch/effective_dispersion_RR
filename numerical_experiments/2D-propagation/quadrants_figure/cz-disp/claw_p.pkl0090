@@ -68,13 +68,13 @@ aF0.015625
 asS'lower'
 p3
 (lp4
-F0.25
-aF0.25
+F0.0
+aF0.0
 asS'num_cells'
 p5
 (lp6
-I6384
-aI6384
+I6400
+aI6400
 asS'names'
 p7
 (lp8

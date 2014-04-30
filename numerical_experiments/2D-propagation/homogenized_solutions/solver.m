@@ -1,14 +1,14 @@
 function []=solver()
 clc; clear all; clf
 
-%compute parameters given: K1, p1, K2, p2
+%compute parameters given: KA, rhoA, KB, rhoB
 
-%%parameters_layered(4,4,1,1); name_solution='z-dispersion.mat';
-%%parameters_layered(5/8,8/5,5/2,2/5); name_solution='c-dispersion_layered.mat';
+parameters_layered(4,4,1,1); name_solution='z-dispersion.mat';
+%parameters_layered(2/5,8/5,8/5,2/5); name_solution='c-dispersion_layered.mat';
 
 %%parameters_sinusoidal(5/8,8/5,5/2,2/5); name_solution='c-dispersion_sinusoidal.mat';
 
-%%parameters_layered(16,1,1,1); name_solution='iso-high-dispersion.mat';
+%parameters_layered(17/2,1,17/32,1); name_solution='iso-high-dispersion.mat';
 %%parameters_layered(16,1,1,1); name_solution='iso-low-dispersion.mat'; %NOTE: change variance to 5
 
 %%parameters_layered(1,1,1.5,2.5); name_solution='cz-dispersion.mat';
@@ -43,7 +43,7 @@ y = (0:(my-1))*dy;
 nit=floor(tf/dt); %number of iterations
 
 %initial conditions
-A=5;
+A=1;
 x0=(x_upper-x_lower)/2; y0=(y_upper-y_lower)/2;
 s=A*exp(-(xx-x0).^2/(2*varx)-(yy-y0).^2/(2*vary)); %IC het in x and y
 %s=A*exp(-(xx-x0).^2/(2*varx)); %IC hom in y

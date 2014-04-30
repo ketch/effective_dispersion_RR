@@ -140,7 +140,7 @@ for i,p in enumerate([p,pc,pz,pcz]):
         if i==1:
             phom = phom/5.
         mx = D['mx']
-        x  = np.squeeze(D['x'])[mx/2:]-100+0.25
+        x  = np.squeeze(D['x'])[mx/2:]-100
         xslice = np.squeeze(phom[mx/2,mx/2:])
         axx[i].plot(on_right[i]*x,xslice,'--k',lw=2*multiplier,alpha=1.0)
 
@@ -157,7 +157,7 @@ for i,p in enumerate([p,pc,pz,pcz]):
     # Homogenized solution x-slice
     if i > 0:
         my = D['my']
-        y  = np.squeeze(D['y'])[my/2:]-100+0.25
+        y  = np.squeeze(D['y'])[my/2:]-100
         yslice = np.squeeze(phom[my/2:,my/2])
         axy[i].plot(on_right[i]*yslice,on_top[i]*y,'--k',lw=2*multiplier)
 
@@ -194,7 +194,7 @@ axins = zoomed_inset_axes(axmain[2],6,loc=1)
 yfrac = yy-np.floor(yy)
 mat = yfrac>0.5
 
-axins.imshow(mat[:80,:320].T,vmin=-0.5, vmax=1.5, extent=[-40,-35,-40,-35],interpolation='nearest',origin='lower',cmap='binary',alpha=0.8)
+axins.imshow(mat[:80/skip,:320/skip].T,vmin=-0.5, vmax=1.5, extent=[-40,-35,-40,-35],interpolation='nearest',origin='lower',cmap='binary',alpha=0.8)
 axins.xaxis.set_major_locator(nullloc)
 axins.yaxis.set_major_locator(nullloc)
 mark_inset(axmain[2],axins,2,4,fc='none',ec='0.5')

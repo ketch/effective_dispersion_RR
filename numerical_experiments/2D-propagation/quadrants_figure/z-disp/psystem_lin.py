@@ -39,9 +39,9 @@ def setaux(x,y, KA, KB, rhoA, rhoB, stress_rel):
         # create a meshgrid out of xfrac and yfrac
         [yf,xf] = np.meshgrid(yfrac,xfrac)
         # density 
-        aux[0,:,:] = rhoA*(yf<=0.5) + rhoB*(yf >0.5)
+        aux[0,:,:] = rhoA*(yf<=0.25) + rhoA*(yf>=0.75) + rhoB*(0.25<yf)*(yf<0.75)
         #Young's modulus
-        aux[1,:,:] = KA  *(yf<=0.5) + KB  *(yf >0.5)
+        aux[1,:,:] = KA * (yf<=0.25) + KA * (yf>=0.75) + KB * (0.25<yf)*(yf<0.75)
         # Stress-strain relation
         aux[2,:,:] = stress_rel
 
@@ -139,7 +139,7 @@ def setup(KA=4., KB=1., rhoA=4., rhoB=1., stress_rel=1,
     Solve the p-system in 2D with variable coefficients
     """
     # Domain
-    x_lower=0.25; y_lower=0.25;
+    x_lower=0.; y_lower=0.;
 
     if square_domain:
         x_upper = 100.
@@ -156,8 +156,8 @@ def setup(KA=4., KB=1., rhoA=4., rhoB=1., stress_rel=1,
     my = (y_upper-y_lower)*Ny
 
     # Initial condition parameters
-    x0 = 0.0 # Center of initial perturbation
-    y0 = 0.25 # Center of initial perturbation
+    x0 = 0. # Center of initial perturbation
+    y0 = 0. # Center of initial perturbation
     vary = 2.0 # Variance (in y) of initial Gaussian
 
     # Stress-strain relation:
@@ -178,8 +178,8 @@ def setup(KA=4., KB=1., rhoA=4., rhoB=1., stress_rel=1,
     if solver_type=='classic':
         solver = pyclaw.ClawSolver2D()
         solver.limiters = pyclaw.limiters.tvd.MC
-        solver.cfl_max = 0.5
-        solver.cfl_desired = 0.45
+        solver.cfl_max = 0.45
+        solver.cfl_desired = 0.4
         solver.dimensional_split=False
 
     elif solver_type=='sharpclaw':
