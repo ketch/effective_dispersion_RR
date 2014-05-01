@@ -8,7 +8,6 @@ from matplotlib import font_manager
 ticks_font = font_manager.FontProperties(family='Bitstream Vera Sans')
 
 import matplotlib.pyplot as plt
-from clawpack.petclaw.solution import Solution
 import numpy as np
 
 
@@ -17,7 +16,6 @@ nullloc = plt.NullLocator()
 
 tick_vals = np.array( (0,25,50,75,100),dtype=int )
 
-frame = [65,65,95,65]
 skip = 4
 
 p   = np.load('p'+str(skip)+'.npy')
@@ -138,7 +136,7 @@ for i,p in enumerate([p,pc,pz,pcz]):
     if i>0:
         phom = D['U']
         if i==1:
-            phom = phom/5.
+            phom = phom/5.  # Accidentally ran this one with wrong initial amplitude
         mx = D['mx']
         x  = np.squeeze(D['x'])[mx/2:]-100
         xslice = np.squeeze(phom[mx/2,mx/2:])
