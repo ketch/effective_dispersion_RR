@@ -19,10 +19,10 @@ def plot_p(frame):
     yy,xx = np.meshgrid(y,x)
 
     p=sol.state.q[0,:,:]
-    fig = pl.figure(figsize=(8, 3))
+    fig = pl.figure(figsize=(8, 3.5))
     #pl.title("t= "+str(sol.state.t),fontsize=20)
     pl.xticks(size=20); pl.yticks(size=20)
-    #pl.xlabel('x',fontsize=20); pl.ylabel('y',fontsize=20)
+    pl.xlabel('x',fontsize=20); pl.ylabel('y',fontsize=20)
     #pl.pcolormesh(xx,yy,p_subxy,cmap=cm.OrRd)
     pl.pcolormesh(xx,yy,p,cmap='RdBu_r')
     pl.autoscale(tight=True)
@@ -32,8 +32,9 @@ def plot_p(frame):
     imaxes = pl.gca(); pl.axes(cb.ax)
     pl.yticks(fontsize=20); pl.axes(imaxes)
     #pl.xticks(fontsize=20); pl.axes(imaxes)
-    pl.axis('equal')
+    #pl.axis('equal')
     pl.axis('tight')
+    fig.tight_layout()
     pl.savefig('./_plots_to_paper/sound-speed_FV_t'+str(frame)+'_pcolor.png')
     pl.close()
 
@@ -44,10 +45,10 @@ def plot_p_leading_order(frame):
     xx=mat['xx']
     yy=mat['yy']
 
-    pl.figure(figsize=(8, 3))
+    fig=pl.figure(figsize=(8, 3.5))
     #pl.title("t= "+str(sol.state.t),fontsize=20)
     pl.xticks(size=20); pl.yticks(size=20)
-    #pl.xlabel('x',fontsize=20); pl.ylabel('y',fontsize=20)
+    pl.xlabel('x',fontsize=20); pl.ylabel('y',fontsize=20)
     #pl.pcolormesh(xx,yy,p_subxy,cmap=cm.OrRd)
     pl.pcolormesh(xx,yy,pp,cmap='RdBu_r')
     pl.autoscale(tight=True)
@@ -57,8 +58,9 @@ def plot_p_leading_order(frame):
     imaxes = pl.gca(); pl.axes(cb.ax)
     pl.yticks(fontsize=20); pl.axes(imaxes)
     #pl.xticks(fontsize=20); pl.axes(imaxes)
-    pl.axis('equal')
+    #pl.axis('equal')
     pl.axis('tight')
+    fig.tight_layout()
     pl.savefig('./_plots_to_paper/sound-speed_LO_t'+str(frame)+'_pcolor.png')
     pl.close()
 

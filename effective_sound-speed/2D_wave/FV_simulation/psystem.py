@@ -47,26 +47,37 @@ def setaux(x,y):
 
     aux = np.empty((4,len(x),len(y)), order='F')
     if het_type == 'checkerboard':
-        # xfrac and yfrac are x and y relative to deltax and deltay resp.
-        xfrac=x-np.floor(x/deltax)*deltax
-        yfrac=y-np.floor(y/deltay)*deltay
+        yfrac = y - np.floor(y)
+        xfrac = x - np.floor(x)
         # create a meshgrid out of xfrac and yfrac
-        [yyfrac,xxfrac]=np.meshgrid(yfrac,xfrac)
+        [yf,xf] = np.meshgrid(yfrac,xfrac)
+        # density
+        aux[0,:,:] = p1*(yf<=0.25) + p1*(yf>=0.75) + p2*(0.25<yf)*(yf<0.75)
+        #Young's modulus
+        aux[1,:,:] = E1 * (yf<=0.25) + E1 * (yf>=0.75) + E2 * (0.25<yf)*(yf<0.75)
+        # Stress-strain relation
+        aux[2,:,:] = linearity_mat1
+
+        # xfrac and yfrac are x and y relative to deltax and deltay resp.
+        #xfrac=x-np.floor(x/deltax)*deltax
+        #yfrac=y-np.floor(y/deltay)*deltay
+        # create a meshgrid out of xfrac and yfrac
+        #[yyfrac,xxfrac]=np.meshgrid(yfrac,xfrac)
         # density 
-        aux[0,:,:]=p1*(xxfrac<=alphax*deltax)*(yyfrac<=alphay*deltay)\
-            +p1*(xxfrac >alphax*deltax)*(yyfrac >alphay*deltay)\
-            +p2*(xxfrac >alphax*deltax)*(yyfrac<=alphay*deltay)\
-            +p2*(xxfrac<=alphax*deltax)*(yyfrac >alphay*deltay)
+        #aux[0,:,:]=p1*(xxfrac<=alphax*deltax)*(yyfrac<=alphay*deltay)\
+        #    +p1*(xxfrac >alphax*deltax)*(yyfrac >alphay*deltay)\
+        #    +p2*(xxfrac >alphax*deltax)*(yyfrac<=alphay*deltay)\
+        #    +p2*(xxfrac<=alphax*deltax)*(yyfrac >alphay*deltay)
         #Young modulus
-        aux[1,:,:]=E1*(xxfrac<=alphax*deltax)*(yyfrac<=alphay*deltay)\
-            +E1*(xxfrac >alphax*deltax)*(yyfrac >alphay*deltay)\
-            +E2*(xxfrac >alphax*deltax)*(yyfrac<=alphay*deltay)\
-            +E2*(xxfrac<=alphax*deltax)*(yyfrac >alphay*deltay)
+        #aux[1,:,:]=E1*(xxfrac<=alphax*deltax)*(yyfrac<=alphay*deltay)\
+        #    +E1*(xxfrac >alphax*deltax)*(yyfrac >alphay*deltay)\
+        #    +E2*(xxfrac >alphax*deltax)*(yyfrac<=alphay*deltay)\
+        #    +E2*(xxfrac<=alphax*deltax)*(yyfrac >alphay*deltay)
         # linearity of material
-        aux[2,:,:]=linearity_mat1*(xxfrac<=alphax*deltax)*(yyfrac<=alphay*deltay)\
-            +linearity_mat1*(xxfrac >alphax*deltax)*(yyfrac >alphay*deltay)\
-            +linearity_mat2*(xxfrac >alphax*deltax)*(yyfrac<=alphay*deltay)\
-            +linearity_mat2*(xxfrac<=alphax*deltax)*(yyfrac >alphay*deltay)
+        #aux[2,:,:]=linearity_mat1*(xxfrac<=alphax*deltax)*(yyfrac<=alphay*deltay)\
+        #    +linearity_mat1*(xxfrac >alphax*deltax)*(yyfrac >alphay*deltay)\
+        #    +linearity_mat2*(xxfrac >alphax*deltax)*(yyfrac<=alphay*deltay)\
+        #    +linearity_mat2*(xxfrac<=alphax*deltax)*(yyfrac >alphay*deltay)
     elif het_type == 'sinusoidal' or het_type == 'smooth_checkerboard':
         [yy,xx]=np.meshgrid(y,x)
         Amp_p=np.abs(p1-p2)/2; offset_p=(p1+p2)/2
@@ -153,7 +164,7 @@ def psystem2D(iplot=False,kernel_language='Fortran',htmlplot=False,
     A=5.
     x0=(x_upper-x_lower)/2.; y0=(y_upper-y_lower)/2.;
     #x0=0.0 # Center of initial perturbation
-    #y0=0.25 # Center of initial perturbation
+    #y0=0.0 # Center of initial perturbation
     varx=10.0; vary=10.0 # Width of initial perturbation
 
     # Boundary conditions
@@ -185,7 +196,7 @@ def psystem2D(iplot=False,kernel_language='Fortran',htmlplot=False,
         raise Exception('Unrecognized value of kernel_language for 2D psystem')
 
     from clawpack import riemann
-    solver.rp = riemann.rp2_psystem
+    solver.rp = riemann.psystem_2D
 
     solver.num_waves = 2
     solver.limiters = pyclaw.limiters.tvd.superbee
