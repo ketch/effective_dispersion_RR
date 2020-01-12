@@ -1,9 +1,9 @@
-effective_dispersion_RR
-=======================
+Two-dimensional wave propagation in layered periodic media
+=====================================================================
 
 This is a reproducibility repository for the manuscript 
-[*Two-dimensional wave propagation in layered periodic media*](http://arxiv.org/abs/1309.6666)
-by Manuel Quezada de Luna and David I. Ketcheson.
+[*Two-dimensional wave propagation in layered periodic media*](https://doi.org/10.1137/130937962)
+by Manuel Quezada de Luna and David I. Ketcheson, published in SIAP.  The free preprint is also available from the [arXiv](http://arxiv.org/abs/1309.6666)
 
 Dependencies:
 
